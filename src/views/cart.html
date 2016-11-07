@@ -15,12 +15,11 @@
 
 <body>
   <div id="cart">
-    <div class="store" v-for="v in cartData.data.data" v-if="cartData.data.data">
+    <div class="store" v-for="items1 in cartData.data.data" v-if="cartData.data.data">
       <div class="top">
-        <div class="label"></div>
-        <div><i><img :src="v.country.regionImgUrl" alt=""></i>{{v.store_name_en}}官网发货</div>
+        <div class="label selected select-store-all"></div>
+        <div><i><img :src="items1.country.regionImgUrl" alt=""></i>{{items1.store_name_en}}官网发货</div>
       </div>
-
       <div class="main">
         <div class="list">
           <div class="tips">
@@ -28,54 +27,55 @@
             <span>满200元免运费</span>
             <a href="#">去凑单<i></i></a>
           </div>
-          <div class="wrap" :class="{ outdate: !value.product.inStock  }" v-for="value in v.cart_list">
-            <div v-for="items in value.product.sku_list" v-if="items.selected">
-              <div class="label">{{ !items.inStock ? "失效" : '' }}</div>
-              <div class="avator"><img :src="value.product.coverImgUrl" alt=""></div>
+          <div class="wrap" :class="{ outdate: !items2.product.instock  }" v-for="items2 in items1.cart_list" :data-id="items2.cart_id">
+            <div v-for="items3 in items2.product.sku_list" v-if="items3.selected">
+              <div class="label selected">{{ !items3.inStock ? "失效" : '' }}</div>
+              <div class="avator"><img :src="items2.product.coverImgUrl" alt=""></div>
               <div class="content">
                 <div class="title">
                   <div class="name">
-                    {{value.product.product_name}}
+                    {{items2.product.product_name}}
                   </div>
                   <div class="right">
                     <div class="price">
-                      ￥{{items.price}}
+                      ￥{{items3.realPrice}}
                     </div>
                     <div class="nums">
-                      X{{items.count}}
+                      X{{items2.count}}
                     </div>
                   </div>
                 </div>
-                <div>颜色： {{items.color}}</div>
-                <div>尺码： {{items.size}}</div>
+                <div>颜色： {{items3.skuValues[0]['value']}}</div>
+                <div>尺码： xxxx</div>
               </div>
             </div>
           </div>
         </div>
         <!-- <button class="clear_goods">清空失效产品</button> -->
       </div>
-
-      <div class="footer">
-        <div class="label"></div>
-        <div class="all">
-          全选
-        </div>
-        <div class="middle">
-          <div class="price">
-            应付金额：<span>{{cartData.data.total_price}}</span>
-          </div>
-          <div class="totalnums">
-            已选件商品
-          </div>
-        </div>
-        <div class="pay">
-          前往结算
-        </div>
-      </div>
+      <div class="grayrect"></div>
     </div>
     <div class="hasnogoods" v-else>
       您的购物车没有商品
     </div>
+    <div class="footer">
+      <div class="label selected select-all"></div>
+      <div class="all">
+        全选
+      </div>
+      <div class="middle">
+        <div class="price">
+          应付金额：<span>{{cartData.data.total_price}}</span>
+        </div>
+        <div class="totalnums">
+          已选 <span></span> 件商品
+        </div>
+      </div>
+      <div class="pay">
+        前往结算
+      </div>
+    </div>
+
   </div>
   <script>
   var cart = new Vue({
@@ -84,6 +84,10 @@
       cartData: cartData
     }
   });
+
+  $(function() {
+    init();
+  })
   </script>
 </body>
 

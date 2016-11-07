@@ -7,8 +7,12 @@ html {
   font-size: 20px;
 }
 #cart {
-  padding-bottom: 2.15rem;
-  background-color: #f3f3f9;
+  position: absolute;
+  top: 0;
+  bottom: -6rem;
+  right: 0;
+  left: 0;
+  background-color: #fff;
   font-size: 14px;
   color: #333;
 }
@@ -27,6 +31,10 @@ html {
   width: 100%;
   height: auto;
   background-color: #fff;
+}
+.store .grayrect {
+  background-color: #f3f3f9;
+  height: 0.5rem;
 }
 .store .top {
   height: 3rem;
@@ -66,9 +74,6 @@ html {
   text-align: center;
   line-height: 0.9rem;
 }
-.store .list {
-  margin-bottom: 0.5rem;
-}
 .store .list .tips {
   display: flex;
   height: 3rem;
@@ -97,18 +102,26 @@ html {
   top: 1rem;
 }
 .store .list .wrap {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+.store .list .wrap:last-child {
+  margin-bottom: 0;
+}
+.store .list .wrap:last-child .avator {
+  border-bottom: none;
+}
+.store .list .wrap:last-child .content {
+  border-bottom: none;
+}
+.store .list .wrap > div {
   height: 5.2rem;
   display: flex;
   flex-direction: row;
   color: #333;
-  margin-bottom: 1rem;
 }
 .store .list .wrap > div > div {
   float: left;
-}
-.store .list .wrap:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
 }
 .store .list .wrap .label {
   margin-top: 0.9rem;
@@ -188,6 +201,9 @@ html {
   border: 1px solid #f0f0f0;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+.selected {
+  background-color: #333;
 }
 .clear_wrap {
   display: flex;
