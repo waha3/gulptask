@@ -17,17 +17,23 @@ gulp.task('html', function() {
       .pipe(livereload());
 });
 
+gulp.task('js', function() {
+  gulp.src('./src/js/**/*.js')
+      .pipe(livereload());
+});
+
 gulp.task('watch', function() {
   livereload.listen();
   gulp.watch('./src/less/**/*.less', ['less']);
   gulp.watch('./src/views/**/*.html', ['html']);
+  gulp.watch('./src/js/**/*.js', ['js']);
 });
 
 gulp.task('connect', function() {
   connect.server({
     root: 'src',
     livereload: true,
-    port: 8888
+    port: 9999
   });
 });
 

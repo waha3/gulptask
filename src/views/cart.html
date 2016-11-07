@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <script type="text/javascript" src="//cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/data.js"></script>
+  <link rel="stylesheet" href="../css/cart.css">
+</head>
+
+<body>
+  <div id="cart">
+    <div class="store" v-for="v in cartData.data.data" v-if="cartData.data.data">
+      <div class="top">
+        <div class="label"></div>
+        <div><i><img :src="v.country.regionImgUrl" alt=""></i>{{v.store_name_en}}官网发货</div>
+      </div>
+
+      <div class="main">
+        <div class="list">
+          <div class="tips">
+            <button>满减</button>
+            <span>满200元免运费</span>
+            <a href="#">去凑单<i></i></a>
+          </div>
+          <div class="wrap" :class="{ outdate: !value.product.inStock  }" v-for="value in v.cart_list">
+            <div v-for="items in value.product.sku_list" v-if="items.selected">
+              <div class="label">{{ !items.inStock ? "失效" : '' }}</div>
+              <div class="avator"><img :src="value.product.coverImgUrl" alt=""></div>
+              <div class="content">
+                <div class="title">
+                  <div class="name">
+                    {{value.product.product_name}}
+                  </div>
+                  <div class="right">
+                    <div class="price">
+                      ￥{{items.price}}
+                    </div>
+                    <div class="nums">
+                      X{{items.count}}
+                    </div>
+                  </div>
+                </div>
+                <div>颜色： {{items.color}}</div>
+                <div>尺码： {{items.size}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <button class="clear_goods">清空失效产品</button> -->
+      </div>
+
+      <div class="footer">
+        <div class="label"></div>
+        <div class="all">
+          全选
+        </div>
+        <div class="middle">
+          <div class="price">
+            应付金额：<span>{{cartData.data.total_price}}</span>
+          </div>
+          <div class="totalnums">
+            已选件商品
+          </div>
+        </div>
+        <div class="pay">
+          前往结算
+        </div>
+      </div>
+    </div>
+    <div class="hasnogoods" v-else>
+      您的购物车没有商品
+    </div>
+  </div>
+  <script>
+  var cart = new Vue({
+    el: '#cart',
+    data: {
+      cartData: cartData
+    }
+  });
+  </script>
+</body>
+
+</html>
