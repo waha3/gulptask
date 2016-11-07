@@ -91,12 +91,24 @@ function selectGoodsNum() {
     });
     $('.totalnums span').html(num);
   });
-  $('.label').click();
+  // $('.label').click();
+}
+
+function calculateTotalPrice() {
+  var totalPrice = $('.footer .price > span').text().trim();
+  $('.wrap .label').on('click', function() {
+    var noSelectGoodsPrice = 0;
+    var currentPrice = $(this).parent().find('.price span').text().trim();
+    noSelectGoodsPriceSum = noSelectGoodsPrice + currentPrice;
+    totalPrice = totalPrice - noSelectGoodsPriceSum;
+    $('.footer .price > span').text(totalPrice);
+  });
 }
 
 function init() {
   select();
   selectStoreAll();
   selectAll();
-  selectGoodsNum();
+  // selectGoodsNum();
+  calculateTotalPrice();
 }
