@@ -1,6 +1,5 @@
 function setCartData(obj) {
-  var Data;
-  Data = {
+  var cartDataInit = {
     cart_list: [],
     carttype: 'cart',
     count: '',
@@ -10,6 +9,26 @@ function setCartData(obj) {
     spuid: ''
   };
   return Object.assign({}, cartDataInit, obj);
+}
+
+function selectData() {
+  var obj = {
+    cart_list: [],
+    carttype: 'cart',
+    count: '',
+    coupon_code: '',
+    product_list: '',
+    skuid: '',
+    spuid: ''
+  };
+  var arr = [];
+  $('.wrap .label').each(function(i, v) {
+    if ($(v).hasClass('selected')) {
+      arr.push($(v).attr('data-id'));
+      obj.cart_list = arr;
+    }
+  });
+  setCartData(obj);
 }
 
 function iterationWrapLabelSelectd(that) {
@@ -36,7 +55,6 @@ function iterationAllLabelSelected() {
       return false;
     } else {
       $('.select-all').addClass('selected');
-      // $('.store .label').click();
     }
   });
 }
@@ -74,10 +92,11 @@ function selectAll() {
   $('.select-all').on('click', function() {
     if ($(this).hasClass('selected')) {
       $(this).removeClass('selected');
+      $('.label').removeClass('selected');
     } else {
       $(this).addClass('selected');
+      $('.label').addClass('selected');
     }
-    $('.select-store-all').click();
   });
 }
 
@@ -91,17 +110,22 @@ function selectGoodsNum() {
     });
     $('.totalnums span').html(num);
   });
-  // $('.label').click();
 }
 
 function calculateTotalPrice() {
-  var totalPrice = $('.footer .price > span').text().trim();
-  $('.wrap .label').on('click', function() {
-    var noSelectGoodsPrice = 0;
-    var currentPrice = $(this).parent().find('.price span').text().trim();
-    noSelectGoodsPriceSum = noSelectGoodsPrice + currentPrice;
-    totalPrice = totalPrice - noSelectGoodsPriceSum;
+  var totalPrice = 0;
+  var currentPrice = 0;
+  $('.label').on('click', function() {
+    $('.label').each(function(i, v) {
+      if ($(v).hasClass('selected')) {
+        currentPrice = $(v).parent('._wrap').find('.price span').text().trim();
+        if (currentPrice) {
+          totalPrice = parseFloat(currentPrice) + totalPrice;
+        }
+      }
+    });
     $('.footer .price > span').text(totalPrice);
+    totalPrice = 0;
   });
 }
 
@@ -109,6 +133,6 @@ function init() {
   select();
   selectStoreAll();
   selectAll();
-  // selectGoodsNum();
+  selectGoodsNum();
   calculateTotalPrice();
 }

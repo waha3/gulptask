@@ -11,73 +11,100 @@
 </head>
 
 <body>
-  <div id="order">
+  <div id="order" :data-list="orderData.data.cart_list">
     <div class="address">
       <i class="left">11</i>
       <p>请选择收货地址</p>
-      <i class="right">22</i>
+      <i class="right">></i>
     </div>
-    <div class="store" data-list="orderData.data.cart_list" v-for="items1 in orderData.data.storelist">
+    <div class="store" v-for="items1 in orderData.data.storelist">
       <div class="top">
-        <div class="label selected select-store-all"></div>
-        <div><i><img :src="items1.country.regionImgUrl" alt=""></i>{{items1.store_name_en}}官网发货</div>
+        <div><i><img :src="items1.country.regionImgUrl" alt=""></i>{{items1.store_name}}官网发货</div>
       </div>
-      <div class="main"></div>
-      <div class="grayrect"></div>
+      <div class="main">
+        <div class="list">
+          <div class="wrap" v-for="items2 in items1.productList" :data-id="items2.cart_id">
+            <div>
+              <div class="_wrap">
+                <div class="avator"><img :src="items2.productbean.coverImgUrl" alt=""></div>
+                <div class="content">
+                  <div class="title">
+                    <div class="name">
+                      {{items2.productbean.name}}
+                    </div>
+                    <div class="right">
+                      <div class="price">
+                        ￥<span>{{items2.productbean.selectedSkuBean.realPrice}}</span>
+                      </div>
+                      <div class="nums">
+                        X{{items2.count}}
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="items2.productbean.selectedSkuBean.skuValues[0]">颜色： {{items2.productbean.selectedSkuBean.skuValues[0]['value']}}</div>
+                  <div v-if="items2.productbean.selectedSkuBean.skuValues[1]">尺码： {{items2.productbean.selectedSkuBean.skuValues[1]['value']}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="orderDetail">
-        <div>商品金额: {{goodsPrice}}</div>
-        <div>运费：官网运费￥{{site_expenses}}+国际运费￥{{international_expenses}}</div>
-        <div>消费税：{{consum_tax}}</div>
-        <div>关税：{{tariff ? tariff : '暂不收取'}}<i>aa</i></div>
-        <div>总计：{{goodsPrice}}</div>
+        <div>商品金额: {{items1.bigStorePrice}}</div>
+        <div>运费：官网运费￥{{items1.bigStoreShippingFee}} + 国际运费￥{{items1.bigStoreTransFee}}</div>
+        <div>关税：{{items1.bigTariff ? items1.bigTariff : '暂不收取'}}<i>?</i></div>
+        <div>总计：{{items1.bigStoreAccountsTotal}}</div>
       </div>
-      <div class="coupon cell">
-        <div>优惠卷</div>
-        <div>请选择优惠卷<i>></i></div>
-      </div>
-      <div class="charges cell">
-        <div>使用佣金抵￥{{charges}}</div>
-        <div>swicth</div>
-      </div>
-      <div class="zhifubao cell pay">
-        <div><i><img src="" alt=""></i>支付宝支付</div>
-        <div><span class="select"></span></div>
-      </div>
-      <div class="weixin cell pay">
-        <div><i><img src="" alt=""></i>微信支付</div>
-        <div><span class="select"></div>
+    </div>
+    <div class="coupon cell">
+      <div>优惠卷</div>
+      <div>请选择优惠卷<i>></i></div>
+    </div>
+    <div class="charges cell">
+      <div>使用佣金抵￥{{}}</div>
+      <div>swicth</div>
+    </div>
+    <div class="zhifubao cell pay">
+      <div><i><img src="" alt=""></i>支付宝支付</div>
+      <div><span class="select active"></span></div>
+    </div>
+    <div class="weixin cell pay">
+      <div><i><img src="" alt=""></i>微信支付</div>
+      <div><span class="select"></div>
       </div>
     <div class="remarks">
       <span>备注</span>
-          <textarea placeholder="有什么特殊的需求可以写在这里"></textarea>
+        <textarea placeholder="有什么特殊的需求可以写在这里"></textarea>
+      </div>
+      <div class="footer">
+        <div class="middle">
+          <div class="price">
+            应付金额<span>￥{{orderData.data.bigOrderAccountsTotal}}</span>
+          </div>
+          <div class="totalnums">
+            已选{{}}件商品
+          </div>
         </div>
-        <div class="footer">
-          <div class="label"></div>
-          <div class="all">
-            全选
-          </div>
-          <div class="middle">
-            <div class="price">
-              应付金额：<span>{{totalPrice}}</span>
-            </div>
-            <div class="totalnums">
-              已选{{totalNum}}件商品
-            </div>
-          </div>
-          <div class="pay">
-            前往支付
-          </div>
+        <div class="pay">
+          前往支付
         </div>
       </div>
     </div>
   </div>
+  </div>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  <script src="../js/order.js"></script>
   <script src="../js/orderData.js"></script>
+
   <script>
   var cart = new Vue({
     el: '#order',
     data: {
       orderData: orderData
     }
+  });
+  $(function() {
+    init();
   });
   </script>
 </body>

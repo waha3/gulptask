@@ -114,13 +114,13 @@ html {
 .store .list .wrap:last-child .content {
   border-bottom: none;
 }
-.store .list .wrap > div {
+.store .list .wrap ._wrap {
   height: 5.2rem;
   display: flex;
   flex-direction: row;
   color: #333;
 }
-.store .list .wrap > div > div {
+.store .list .wrap ._wrap > div {
   float: left;
 }
 .store .list .wrap .label {
@@ -234,8 +234,11 @@ html {
 #order .store .wrap {
   margin-left: 0.5rem;
 }
-#order .store .wrap:last-child {
-  border-bottom: 1px solid #f0f0f0;
+#order .store .wrap .avator {
+  border-bottom: none;
+}
+#order .store .wrap .content {
+  border-bottom: none;
 }
 #order .address {
   margin-bottom: 0.5rem;
@@ -260,6 +263,10 @@ html {
 #order .orderDetail > div {
   text-align: right;
   line-height: 2em;
+  color: #999;
+}
+#order .orderDetail > div:last-child {
+  color: #333;
 }
 #order .cell {
   height: 2.2rem;
@@ -277,9 +284,12 @@ html {
 #order .coupon {
   margin-top: 0.5rem;
 }
+#order .charges {
+  border-top: 1px solid #f0f0f0;
+}
 #order .zhifubao {
   margin-top: 0.5rem;
-  border-bottom: 1px dotted #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
 }
 #order .pay span {
   display: block;
@@ -310,4 +320,86 @@ html {
 #order .remarks textarea::-webkit-input-placeholder {
   color: #999;
   text-indent: 0.5rem;
+}
+.coupon > div:last-child {
+  color: #ee1741;
+}
+.coupon .selected {
+  color: #999;
+}
+.pay .active {
+  background-color: yellow;
+}
+#coupon {
+  background-color: #f3f3f9;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 14px;
+}
+#coupon .couponList {
+  height: 7.5rem;
+  margin: 0.5rem;
+  background-color: #fff;
+  padding: 0.8rem 0.7rem;
+}
+#coupon .couponList .wrap {
+  height: 100%;
+  width: 100%;
+  border: 1px dotted #f0f0f0;
+  border-radius: 4px;
+  display: flex;
+}
+#coupon .couponList .wrap > div {
+  height: 100%;
+}
+#coupon .couponList .wrap .left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px dotted #f0f0f0;
+  color: #ffaa00;
+}
+#coupon .couponList .wrap .left h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+#coupon .couponList .wrap .right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 0.7rem;
+}
+#coupon .couponList .wrap .right > div {
+  line-height: 2em;
+}
+#coupon .couponList .wrap .right .title {
+  color: #ffaa00;
+}
+#coupon .couponList .wrap .right .userange {
+  color: #666;
+}
+#coupon .couponList .wrap .right .time {
+  color: #999;
+}
+#coupon .couponList .wrap .bar {
+  width: 4px;
+  height: 100%;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #ffaa00;
+}
+#coupon .invalid .left {
+  color: #f0f0f0 !important;
+}
+#coupon .invalid .right > div {
+  color: #f0f0f0 !important;
+}
+#coupon .invalid .bar {
+  display: none;
 }

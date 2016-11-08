@@ -81,7 +81,6 @@
 
   .list {
     // margin-bottom: 0.5rem;
-
     .tips {
       display: flex;
       height: 3rem;
@@ -124,6 +123,7 @@
 
       &:last-child {
         margin-bottom: 0;
+
         .avator {
           border-bottom: none;
         }
@@ -133,7 +133,7 @@
         }
       }
 
-      > div {
+      ._wrap {
         height: 5.2rem;
         display: flex;
         flex-direction: row;
@@ -141,7 +141,7 @@
         // margin-bottom: 1rem;
       }
 
-      > div > div {
+      ._wrap > div {
         float: left;
       }
 
@@ -285,7 +285,15 @@
       margin-left: 0.5rem;
 
       &:last-child {
-        border-bottom: 1px solid @borderColor;
+        // border-bottom: 1px solid @borderColor;
+      }
+
+      .avator {
+        border-bottom: none;
+      }
+
+      .content {
+        border-bottom: none;
       }
     }
   }
@@ -317,6 +325,10 @@
     > div {
       text-align: right;
       line-height: 2em;
+      color: @fontGray;
+      &:last-child {
+        color: @fontBlack;
+      }
     }
   }
 
@@ -341,12 +353,12 @@
   }
 
   .charges {
-    // border-top: 1px solid @borderColor;
+    border-top: 1px solid @borderColor;
   }
 
   .zhifubao {
     margin-top: 0.5rem;
-    border-bottom: 1px dotted @borderColor;
+    border-bottom: 1px solid @borderColor;
   }
 
   .pay {
@@ -383,6 +395,101 @@
         color: @fontGray;
         text-indent: 0.5rem;
       }
+    }
+  }
+}
+
+.coupon {
+  >div{
+    &:last-child {
+      color: @fontRed;
+    }
+  }
+  .selected {
+    color: @fontGray;
+  }
+}
+
+.pay {
+  .active {
+    background-color: yellow;
+  }
+}
+
+#coupon {
+  background-color: @bgcolor;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 14px;
+  .couponList {
+    height: 7.5rem;
+    margin: 0.5rem;
+    background-color: #fff;
+    padding: 0.8rem 0.7rem;
+    .wrap {
+      height: 100%;
+      width: 100%;
+      border: 1px dotted @borderColor;
+      border-radius: @radius;
+      display: flex;
+      > div {
+        height: 100%;
+      }
+      .left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-right: 1px dotted @borderColor;
+        color: @fontOrange;
+        h3 {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+      .right {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 0.7rem;
+        > div {
+          line-height: 2em;
+        }
+        .title {
+          color: @fontOrange;
+        }
+        .userange {
+          color: #666;
+        }
+        .time {
+          color: #999;
+        }
+      }
+      .bar {
+        width: 4px;
+        height: 100%;
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+        background-color: @fontOrange;
+      }
+    }
+  }
+  .invalid {
+    .left {
+      color: @borderColor !important;
+    }
+    .right {
+      > div {
+        color: @borderColor !important;
+      }
+    }
+    .bar {
+      display: none;
     }
   }
 }
