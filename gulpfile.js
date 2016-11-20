@@ -3,11 +3,16 @@ var plumber = require('gulp-plumber');
 var livereload = require('gulp-livereload');
 var less = require('gulp-less');
 var connect = require('gulp-connect');
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
+var cssnano = require('cssnano');
 
 gulp.task('less', function() {
   gulp.src('./src/less/**/*.less')
       .pipe(plumber())
       .pipe(less())
+      .pipe(postcss([autoprefixer, cssnano]))
       .pipe(gulp.dest('./src/css'))
       .pipe(livereload());
 });
