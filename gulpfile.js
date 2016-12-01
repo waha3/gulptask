@@ -7,7 +7,7 @@ var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var cssnano = require('cssnano');
-// var rev = require('gulp-rev');
+var rev = require('gulp-rev');
 
 gulp.task('less', function() {
   gulp.src('./src/less/**/*.less')

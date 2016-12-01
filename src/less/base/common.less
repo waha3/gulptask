@@ -4,9 +4,52 @@
   width: 1000px;
   height: auto;
   margin: 0 auto;
+  padding-bottom: 20px;
 }
 
 .breadcrumb {
   height: 50px;
   line-height: 50px;
+  color: @fontLightBlue;
+
+  a {
+    padding: 0 5px;
+    color: @fontLightBlue;
+  }
+
+  .active {
+    color: @fontLightGray;
+  }
+}
+
+.pagination {
+  text-align: center;
+
+  > div {
+    display: inline-block;
+    width: auto;
+    overflow: hidden;
+
+    span {
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      color: #000;
+      display: inline-block;
+      float: left;
+
+      &:first-child {
+        font-size: 16px;
+      }
+
+      &:last-child {
+        font-size: 16px;
+      }
+    }
+
+    .active {
+      color: @fontGray;
+    }
+  }
 }
