@@ -7,12 +7,14 @@ var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var cssnano = require('cssnano');
+// var rev = require('gulp-rev');
 
 gulp.task('less', function() {
   gulp.src('./src/less/**/*.less')
       .pipe(plumber())
       .pipe(less())
       .pipe(postcss([autoprefixer, cssnano]))
+      // .pipe(rev())
       .pipe(gulp.dest('./src/css'))
       .pipe(livereload());
 });
