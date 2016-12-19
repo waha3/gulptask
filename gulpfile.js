@@ -7,14 +7,14 @@ var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var cssnano = require('cssnano');
-var rev = require('gulp-rev');
 
 gulp.task('less', function() {
   gulp.src('./src/less/**/*.less')
       .pipe(plumber())
       .pipe(less())
-      .pipe(postcss([autoprefixer, cssnano]))
-      // .pipe(rev())
+      .pipe(postcss([autoprefixer({
+        'browsers': ['last 12 version', 'last 3 iOS versions']
+      }), cssnano]))
       .pipe(gulp.dest('./src/css'))
       .pipe(livereload());
 });
@@ -42,6 +42,10 @@ gulp.task('connect', function() {
     livereload: true,
     port: 9999
   });
+});
+
+gulp.task('dist', function() {
+  gulp.src('')
 });
 
 gulp.task('default', [
